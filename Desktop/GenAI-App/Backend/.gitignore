@@ -1,0 +1,10 @@
+# Ignore Environment Files from everywhere
+.env
+*.env
+Backend/.env
+Frontend/.env
+
+# Ignore Node Modules & Builds
+node_modules/
+dist/
+build/
