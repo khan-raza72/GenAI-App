@@ -22,15 +22,27 @@ const Home = () => {
   };
 
   const handleGenerateReport = async () => {
-    const resumeFile = resumeInputRef.current.files[0];
-    const data = await generateReport({
-      jobDescription,
-      selfDescription,
-      resumeFile,
-    });
-    navigate(`/interview/${data._id}`);
-  };
+    try {
+      const resumeFile = resumeInputRef.current?.files[0] || null;
 
+      const data = await generateReport({
+        jobDescription,
+        selfDescription,
+        resumeFile,
+      });
+
+      // 🟢 Safe Navigation Check
+      if (data && data._id) {
+        navigate(`/interview/${data._id}`);
+      } else if (data && data.interviewReport?._id) {
+        navigate(`/interview/${data.interviewReport._id}`);
+      } else {
+        console.error("Report ID missing in response:", data);
+      }
+    } catch (error) {
+      console.error("Failed to generate report:", error);
+    }
+  };
   if (loading) {
     return (
       <main className="loading-screen">
@@ -41,14 +53,13 @@ const Home = () => {
 
   return (
     <div className="home-page" style={{ position: "relative" }}>
-      
       {/* 🔴 4. TOP-RIGHT LOGOUT BUTTON SECTION */}
-      <div 
+      <div
         style={{
           position: "absolute",
           top: "20px",
           right: "24px",
-          zIndex: 100
+          zIndex: 100,
         }}
       >
         <button
@@ -67,7 +78,7 @@ const Home = () => {
             gap: "8px",
             backdropFilter: "blur(8px)",
             boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-            transition: "all 0.2s ease-in-out"
+            transition: "all 0.2s ease-in-out",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = "rgba(239, 68, 68, 0.15)";
@@ -141,7 +152,9 @@ const Home = () => {
               placeholder={`Paste the full job description here...\ne.g. 'Senior Frontend Engineer at Google requires proficiency in React, TypeScript, and large-scale system design...'`}
               maxLength={5000}
             />
-            <div className="char-counter">{jobDescription.length} / 5000 chars</div>
+            <div className="char-counter">
+              {jobDescription.length} / 5000 chars
+            </div>
           </div>
 
           {/* Vertical Divider */}
