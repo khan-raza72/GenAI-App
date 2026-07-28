@@ -12,16 +12,14 @@ const tokenBlacklistModel = require("../model/blacklist.model.js");
 async function registerUserController(req, res) {
   const { username, email, password } = req.body;
 
-  // is
   if (!username || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
-  // isUserAlreadyExists.username==username   and check email as well
+
   const isUserAlreadyExists = await userModel.findOne({
     $or: [{ username }, { email }],
   });
 
-  // Yeh line sabse zaroori hai   isUserAlreadyExists.username==username
   if (isUserAlreadyExists) {
     return res.status(400).json({ message: "User already exists" });
   }
@@ -29,17 +27,20 @@ async function registerUserController(req, res) {
   const hash = await bcrypt.hash(password, 10);
 
   const user = new userModel({ username, email, password: hash });
-  // password ko hash karega
   await user.save();
 
-  // token generate for user profile
   const token = jwt.sign(
     { id: user._id, username: user.username },
     process.env.JWT_SECRET,
     { expiresIn: "1d" },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
 
   res.status(201).json({
     message: "User registered successfully",
@@ -57,7 +58,6 @@ async function registerUserController(req, res) {
  * @access Public
  */
 
-// login controller
 async function loginUserController(req, res) {
   const { email, password } = req.body;
 
@@ -80,7 +80,13 @@ async function loginUserController(req, res) {
     { expiresIn: "1d" },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 24 * 60 * 60 * 1000,
+  });
+
   res.status(200).json({
     message: "User logged in successfully",
     user: {
@@ -103,7 +109,11 @@ async function logoutUserController(req, res) {
     await tokenBlacklistModel.create({ token });
   }
 
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+  });
 
   res.status(200).json({
     message: "User logged out successfully",
@@ -116,21 +126,16 @@ async function logoutUserController(req, res) {
  * @access private
  */
 
-// Backend/src/controllers/auth.controller.js
-
 async function getMeController(req, res) {
   try {
-    // 🟢 SAFE CHECK: Pehle dekhein req.user exist karta hai ya nahi
     if (!req.user) {
       return res.status(401).json({
         message: "Unauthorized: User not found or session expired."
       });
     }
 
-    // Single source of ID lookup (req.user._id ya req.user.id)
     const userId = req.user._id || req.user.id;
 
-    // Database lookup
     const user = await userModel.findById(userId).select("-password");
 
     if (!user) {

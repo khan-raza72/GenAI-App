@@ -6,12 +6,10 @@ const app = express()
 
 
 // 🟢 Sabse pehle CORS middleware (Routes se pehle aana compulsory hai!)
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: "https://gen-ai-app-sigma.vercel.app",   // exact frontend URL, "*" nahi
+  credentials: true,
+}));
 
 app.use(express.json())
 app.use(cookieParser())
