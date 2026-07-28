@@ -1,6 +1,0 @@
-a= int (input("Enter the first numbers is ", ))
-print("The square of the number is ", a**2)
-#print("The square of the number is ", a**2 )
-print('"raza"')
-print('''"Teacher day"''')
-print("\\n")
