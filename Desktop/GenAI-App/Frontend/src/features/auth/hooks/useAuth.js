@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 
-import { AuthContext } from "../AuthContext"
+import { AuthContext } from "../auth.context.jsx";
 import { useContext, useEffect } from "react";
 // useContext -> context (global box) se data padhne ke liye
 // useEffect  -> component load hote hi kuch code chalane ke liye
