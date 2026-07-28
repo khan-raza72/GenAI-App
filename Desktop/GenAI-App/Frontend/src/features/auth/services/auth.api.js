@@ -1,50 +1,28 @@
 import axios from "axios";
 
 const api = axios.create({
-  // 🟢 Base URL mein domain rakhein (bina '/api' ke)
-  baseURL:
-    import.meta.env.VITE_API_BASE_URL || "https://genai-app-3w8f.onrender.com",
-  withCredentials: true,
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://genai-app-3w8f.onrender.com",
+  withCredentials: true, // ⚠️ CORS cookies ke liye must hai!
 });
 
 export async function register({ username, email, password }) {
-  try {
-    const response = await api.post("/api/auth/register", {
-      username,
-      email,
-      password,
-    });
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
+  const response = await api.post('/api/auth/register', { username, email, password });
+  return response.data;
 }
 
 export async function login({ email, password }) {
-  try {
-    const response = await api.post("/api/auth/login", { email, password });
-    return response.data;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
+  const response = await api.post("/api/auth/login", { email, password });
+  return response.data;
 }
 
 export async function logout() {
-  try {
-    const response = await api.get("/api/auth/logout");
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const response = await api.get("/api/auth/logout");
+  return response.data;
 }
 
 export async function getMe() {
-  try {
-    const response = await api.get("/api/auth/get-me");
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
+  const response = await api.get("/api/auth/get-me");
+  return response.data;
 }
+
+export default api; // Default export taaki doosre service files me bhi import kar sakein

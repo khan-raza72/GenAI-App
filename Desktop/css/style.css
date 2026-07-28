@@ -1,0 +1,44 @@
+body {
+    background-color: #170606;
+    color: white;
+}
+.cd {
+    background-color: navy;
+    margin-right:5px;
+    padding: 5px;
+
+    float : left;
+}
+#lastdiv
+{
+    clear: both;
+
+}
+
+
+
+
+/* 
+  EXAMPLE 1 
+body 
+{
+       background-color: black;
+       color: white;
+}
+
+.d1 {
+    border:2px solid orange;
+
+}
+
+.d2 {
+    border:2px solid lightgreen;
+    width: 200px;
+    float: right;
+}
+.d3
+{
+    border: 2px solid hotpink;
+
+
+} */

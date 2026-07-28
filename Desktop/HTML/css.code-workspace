@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../css"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "css",
+		"liveServer.settings.port": 5501
+	}
+}

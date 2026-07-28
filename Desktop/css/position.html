@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position</title>
+<style>
+body
+{
+    background-color:#14131333;
+    color:rgb(228, 30, 30);
+    font-family: Arial, Helvetica, sans-serif;
+}
+#d1
+{
+    background-color: hsl(272, 94%, 50%);
+    color: black;
+    z-index: 10;
+    height: 100px;
+    width: 1000px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+#d2
+{
+    background-color: #ea092f;
+    height: 100px;
+    position: relative;
+    width: 100px;
+    top: 100px;
+    left: 20px;
+
+
+}
+#d3
+{
+    background-color: cyan;
+    color: navy;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    left: 10px;
+    top: 100px;
+
+}
+#d21
+{
+    background-color:hwb(262 8% 12%);
+    color:navy;
+    height: 40px;
+    width: 40px;
+    position: absolute ;
+    left: 50px;
+    top: 10px;
+}
+#d22
+{
+    background-color: lab(51.21% 72.64 62.93);
+    color: navy;
+    height: 40px;
+    width: 40px;
+    position:absolute;
+    left: 10px;
+    top: 10px;
+
+}
+#container
+{
+    background-color: #55555555;
+    height:1000px;
+    width: 1000px;
+    position: relative;
+    top: 100px; 
+
+}
+#menu
+{
+    position: absolute;
+    left: 50px;
+    top: 70px;
+}
+#menu a
+{
+    text-decoration: none;
+    color: rgb(15, 241, 49);
+    padding: 5px;
+    margin: right: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-weight: bold;
+}
+#menu a:hover
+{
+
+    color: black;
+}
+</style>
+</head>
+<body>
+        <div id="container">
+        <h1>Position Example 3</h1>
+        <div id="d1"> <div><div id="menu">
+            <a href="https://www.google.com">Google</a>
+            <a href="mysirg.com">mySirG</a>
+            <a href="yahoo.com">Yahoo</a>
+            <a href="home.html">Home</a>
+            <a href="help.html">Help</a>
+         </div>
+        </div>
+        </div>
+            <div id="d2">
+                 <div id="d21">
+            </div>
+                 <div id="d22">
+                </div>
+        </div>
+
+        <div id="d3">
+            <h3>HEADING1</h3>
+        </div>
+</div>
+</body>
+</html>  
