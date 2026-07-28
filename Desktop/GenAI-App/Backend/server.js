@@ -1,7 +1,7 @@
 require("dotenv").config(); // Load environment variables first
 const app = require("./src/app");
 const connectToDB = require("./src/config/database");
-import cors from "cors";
+const cors = require("cors");
 
 app.use(
   cors({
