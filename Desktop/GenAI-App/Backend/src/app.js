@@ -4,12 +4,18 @@ const cors = require("cors")
 
 const app = express()
 
+
+// 🟢 Sabse pehle CORS middleware (Routes se pehle aana compulsory hai!)
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
+
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}))
+
 
 /* require all the routes here */
 const authRouter = require("./routes/auth.routes")
