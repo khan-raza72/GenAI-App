@@ -2,9 +2,10 @@ import axios from "axios"
 
 
 const api = axios.create({
-    baseURL: "http://localhost:3000",
-    withCredentials: true
-})
+  // VITE_API_BASE_URL check karega, agar na mile toh direct Render backend URL use karega
+  baseURL: import.meta.env.VITE_API_BASE_URL || "https://genai-app-3w8f.onrender.com/api",
+  withCredentials: true,
+});
 
 export async function register({ username, email, password }) {
 
